@@ -62,7 +62,7 @@ var API_URL = 'https://api-tokyochallenge.odpt.org/api/v4/';
 var SQRT3 = Math.sqrt(3);
 var DEGREE_TO_RADIAN = Math.PI / 180;
 
-var modelOrigin = mapboxgl.MercatorCoordinate.fromLngLat([139.7670, 35.6814]);
+var modelOrigin = mapboxgl.MercatorCoordinate.fromLngLat([138.252924, 36.204823999999995]);
 var modelScale = 1 / 2 / Math.PI / 6378137 / Math.cos(35.6814 * DEGREE_TO_RADIAN);
 
 var lang = getLang();
@@ -152,6 +152,15 @@ const setupWebsocket = function(){
 	return sock;
 }
 webSocketConnection = setupWebsocket();
+
+const generatePointSphere = function(){
+	var geometry = new THREE.SphereGeometry(0.1, 32, 32);
+	var material = new THREE.MeshLambertMaterial({
+			color: 0xffff00,
+	});
+	var sphere = new THREE.Mesh( geometry, material );
+	return sphere;
+}
 
 // Replace MapboxLayer.render to support underground rendering
 var render = MapboxLayer.prototype.render;
@@ -937,6 +946,8 @@ map.once('styledata', function () {
 		}
 	}
 
+	const spheres = [];
+
 	function updatePackmanShape(packman, t) {
 		var feature = packman.railwayFeature;
 		var offset = packman.offset;
@@ -1260,6 +1271,20 @@ function updateGhostShape(ghost, t) {
 						updateTrainProps(train);
 						//updateTrainShape(train, 0);
 						updatePackmanShape(train, 0);
+						var featureCoords = turf.getCoords(train.railwayFeature)
+						for(const featureCoord of featureCoords){
+							const sphereCoord = mapboxgl.MercatorCoordinate.fromLngLat(featureCoord);
+							const sphere = generatePointSphere();
+							const position = sphere.position;
+							const scale = sphere.scale;
+							position.x = sphereCoord.x - modelOrigin.x;
+							position.y = -(sphereCoord.y - modelOrigin.y);
+							position.z = (train.altitude || 0) * altitudeUnit + objectScale / 2;
+							scale.x = scale.z = objectScale;
+							scale.y = carScale;
+							trainLayers.addObject(sphere, train, 1000);
+							spheres.push(sphere);
+						}
 					}
 					setTrainStandingStatus(train, true);
 					train.animationID = startAnimation({

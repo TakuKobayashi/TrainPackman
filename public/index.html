@@ -5,11 +5,11 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <link rel="apple-touch-icon" href="logo192.png" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/loaders.css/0.1.2/loaders.min.css" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl.css" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
-	<link rel="stylesheet" type="text/css" href="style.css" />
-  <title>Mini Tokyo 3D</title>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/loaders.css/0.1.2/loaders.min.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" /> -->
+<!--  <link rel="stylesheet" type="text/css" href="style.css" /> -->
+  <title>TrainPackman</title>
 	<meta name="description" content="A real-time 3D digital map of Tokyo's public transport system. This data visualization was produced by Akihiko Kusanagi." />
 	<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1" />
 	<meta property="og:title" content="Mini Tokyo 3D" />
@@ -22,53 +22,12 @@
 	<meta property="og:image" content="https://nagix.github.io/mini-tokyo-3d/images/screenshot1.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@nagix" />
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/deck.gl@7.3.2/dist.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.4.0/mapbox-gl.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.6/turf.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/japanese-holidays@1.0.9/lib/japanese-holidays.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/japanese-holidays@1.0.9/lib/japanese-holidays.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/deck.gl@7.3.2/dist.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.6/turf.min.js"></script> -->
 </head>
 <body>
-	<div id="map"></div>
-	<div id="loader" class="loader-inner ball-pulse">
-		<div></div><div></div><div></div>
-	</div>
-  <div id="loading-error"></div>
   <div id="root"></div>
-
-	<script type="x-shader/x-vertex" id="vertexShader">
-		varying float intensity;
-
-		void main() {
-			vec3 vNormal = normalize( normalMatrix * normal );
-			vec3 vNormel = normalize( vec3( modelViewMatrix * vec4( position, 1.0 ) ) );
-			intensity = -dot( vNormal, vNormel );
-
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-		}
-	</script>
-
-	<script type="x-shader/x-fragment" id="fragmentShader">
-		uniform vec3 glowColor;
-		varying float intensity;
-
-		void main() {
-			float r = glowColor.r + ( 1.0 - glowColor.r ) * intensity;
-			float g = glowColor.g + ( 1.0 - glowColor.g ) * intensity;
-			float b = glowColor.b + ( 1.0 - glowColor.b ) * intensity;
-			gl_FragColor = vec4( r, g, b, 1.0 );
-		}
-	</script>
-
-	<script type="text/javascript" src="js/main.js"></script>
-
-	<script type="text/javascript">
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-39988758-2', 'auto');
-		ga('send', 'pageview');
-	</script>
 </body>
+</html>

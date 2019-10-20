@@ -355,7 +355,7 @@ var map = new mapboxgl.Map({
 	style: 'data/osm-liberty.json',
 	attributionControl: true,
 	hash: true,
-	center: [139.7670, 35.6814],
+	center: [138.252924, 36.204823999999995],
 	zoom: 14,
 	pitch: 60
 });
